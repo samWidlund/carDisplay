@@ -5,19 +5,15 @@ class SimpleEditableTree:
     def __init__(self, root):
         self.root = root
         
-        # Skapa Treeview
         self.tree = ttk.Treeview(root, columns=('Toyota', 'Yaris', '2013'), show='headings')
         self.tree.pack(pady=10)
         
-        # Sätt upp kolumner
         for col in ('Toyota', 'Yaris', '2013'):
             self.tree.heading(col, text=f'{col}')
             self.tree.column(col, width=100)
         
-        # Lägg till data
         self.tree.insert('', 'end', values=('test1', 'test2', '2013'))
         
-        # Entry-fält för redigering
         frame = tk.Frame(root)
         frame.pack(pady=10)
         
@@ -31,7 +27,6 @@ class SimpleEditableTree:
         tk.Button(frame, text="Uppdatera", command=self.update_selected).grid(row=0, column=4, padx=10)
         tk.Button(frame, text="Lägg till", command=self.add_row).grid(row=0, column=5, padx=5)
         
-        # Bind selection event
         self.tree.bind('<<TreeviewSelect>>', self.on_select)
     
     def on_select(self, event):
