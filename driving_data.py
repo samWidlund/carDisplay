@@ -5,10 +5,10 @@ class SimpleEditableTree:
     def __init__(self, root):
         self.root = root
         
-        self.tree = ttk.Treeview(root, columns=('Antal mil', 'Tankad mängd', 'Datum', 'Medel förbrukning'), show='headings')
+        self.tree = ttk.Treeview(root, columns=('Antal mil (mil)', 'Tankad mängd (Liter)', 'Datum', 'Medel förbrukning (L/Mil)'), show='headings')
         self.tree.pack(pady=10)
         
-        for col in ('Antal mil', 'Tankad mängd', 'Datum', 'Medel förbrukning'):
+        for col in ('Antal mil (mil)', 'Tankad mängd (Liter)', 'Datum', 'Medel förbrukning (L/Mil)'):
             self.tree.heading(col, text=f'{col}')
             self.tree.column(col, width=100)
         
@@ -18,12 +18,12 @@ class SimpleEditableTree:
         frame.pack(pady=10)
         
         self.entries = []
-        for i in range(3):
+        for i in range(4):
             entry = tk.Entry(frame, width=15)
             entry.grid(row=0, column=i+1, padx=5)
             self.entries.append(entry)
         
-        tk.Button(frame, text="Lägg till", command=self.add_row).grid(row=0, column=5, padx=5)    
+        tk.Button(frame, text="Lägg till", command=self.add_row).grid(row=0, column=6, padx=5)
         self.tree.bind('<<TreeviewSelect>>', self.on_select)
     
     def on_select(self, event):
