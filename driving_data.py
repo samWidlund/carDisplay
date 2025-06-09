@@ -10,7 +10,7 @@ class SimpleEditableTree:
         self.root = root
         self.root.title("Driving Data")
         
-        self.tree = ttk.Treeview(root, columns = self.columns, show='headings')
+        self.tree = ttk.Treeview(root, columns=self.columns, show='headings')
         self.tree.pack(pady=10)
         
         for col in (self.columns):
