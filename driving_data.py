@@ -2,14 +2,18 @@ import tkinter as tk
 from tkinter import ttk
 
 class SimpleEditableTree:
+
+    avgFuelConsumption = 0
+    columns = ('Antal mil (mil)', 'Tankad mängd (Liter)', 'Datum', 'Medel förbrukning (L/Mil)')
+
     def __init__(self, root):
         self.root = root
         self.root.title("Driving Data")
         
-        self.tree = ttk.Treeview(root, columns=('Antal mil (mil)', 'Tankad mängd (Liter)', 'Datum', 'Medel förbrukning (L/Mil)'), show='headings')
+        self.tree = ttk.Treeview(root, columns = self.columns, show='headings')
         self.tree.pack(pady=10)
         
-        for col in ('Antal mil (mil)', 'Tankad mängd (Liter)', 'Datum', 'Medel förbrukning (L/Mil)'):
+        for col in (self.columns):
             self.tree.heading(col, text=f'{col}')
             self.tree.column(col, width=100)
         
