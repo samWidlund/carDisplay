@@ -4,6 +4,7 @@ from tkinter import ttk
 class SimpleEditableTree:
     def __init__(self, root):
         self.root = root
+        self.root.title("Driving Data")
         
         self.tree = ttk.Treeview(root, columns=('Antal mil (mil)', 'Tankad mängd (Liter)', 'Datum', 'Medel förbrukning (L/Mil)'), show='headings')
         self.tree.pack(pady=10)
