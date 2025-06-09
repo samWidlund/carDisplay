@@ -24,6 +24,8 @@ class SimpleEditableTree:
             self.entries.append(entry)
         
         tk.Button(frame, text="Lägg till", command=self.add_row).grid(row=0, column=6, padx=5)
+        tk.Button(frame, text="Uppdatera", command=self.update_selected).grid(row=0, column=7, padx=5)
+        
         self.tree.bind('<<TreeviewSelect>>', self.on_select)
     
     def on_select(self, event):
