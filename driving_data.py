@@ -3,7 +3,9 @@ from tkinter import ttk
 
 class SimpleEditableTree:
 
-    avgFuelConsumption = 0
+    avgFuelConsumption = 0.0
+    totalDistance = 0.0
+    totalFuel = 0.0
     columns = ('Antal mil (mil)', 'Tankad mängd (Liter)', 'Datum', 'Medel förbrukning (L/Mil)')
 
     def __init__(self, root):
@@ -17,7 +19,7 @@ class SimpleEditableTree:
             self.tree.heading(col, text=f'{col}')
             self.tree.column(col, width=100)
         
-        self.tree.insert('', 'end', values=('xxxx', 'xx,x', 'xx-xx-xx', 'xx,x'))
+        self.tree.insert('', 'end', values=('xxxx', 'xx,x', 'xx-xx-xx', self.avgFuelConsumption))
         
         frame = tk.Frame(root)
         frame.pack(pady=10)
