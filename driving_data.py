@@ -19,9 +19,7 @@ class SimpleEditableTree:
         for col in (self.columns):
             self.tree.heading(col, text=f'{col}')
             self.tree.column(col, width=100)
-        
-        self.tree.insert('', 'end', values=('xxxx', 'xx,x', 'xx-xx-xx', self.avgFuel))
-        
+                
         frame = tk.Frame(root)
         frame.pack(pady=10)
         
