@@ -11,7 +11,7 @@ class SimpleEditableTree:
 
     def __init__(self, root):
         self.root = root
-        self.root.title("Driving Data")
+        self.root.title("Fuel Data")
         
         self.tree = ttk.Treeview(root, columns=self.columns, show='headings')
         self.tree.pack(pady=10)
