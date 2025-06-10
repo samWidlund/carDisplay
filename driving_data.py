@@ -7,7 +7,7 @@ class SimpleEditableTree:
     totalDistance = 0.0
     totalFuel = 0.0
     avgFuel = 0.0
-    columns = ('Mil', 'Bensin (L)', 'Datum', 'Förbrukning (L/Mil)')
+    columns = ('Mil', 'Bensin', 'Datum', 'Förbrukning')
 
     def __init__(self, root):
         self.root = root
