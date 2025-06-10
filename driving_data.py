@@ -6,7 +6,7 @@ class SimpleEditableTree:
     # global variables
     totalDistance = 0.0
     totalFuel = 0.0
-    avgFuelConsumption = 0.0
+    avgFuel = 0.0
     columns = ('Mil', 'Bensin (L)', 'Datum', 'Förbrukning (L/Mil)')
 
     def __init__(self, root):
@@ -20,7 +20,7 @@ class SimpleEditableTree:
             self.tree.heading(col, text=f'{col}')
             self.tree.column(col, width=100)
         
-        self.tree.insert('', 'end', values=('xxxx', 'xx,x', 'xx-xx-xx', self.avgFuelConsumption))
+        self.tree.insert('', 'end', values=('xxxx', 'xx,x', 'xx-xx-xx', self.avgFuel))
         
         frame = tk.Frame(root)
         frame.pack(pady=10)
@@ -87,10 +87,10 @@ class SimpleEditableTree:
             except (ValueError, TypeError):
                 continue
         
-        self.avgFuelConsumption = round((self.totalFuel / self.totalDistance if self.totalDistance > 0 else 0.0), 2)
+        self.avgFuel = round((self.totalFuel / self.totalDistance if self.totalDistance > 0 else 0.0), 2)
         
     def update_avg_consumption(self, new_value):
-        self.avgFuelConsumption = new_value
+        self.avgFuel = new_value
 
 root = tk.Tk()
 app = SimpleEditableTree(root)
