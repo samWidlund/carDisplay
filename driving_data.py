@@ -3,9 +3,9 @@ from tkinter import ttk
 
 class SimpleEditableTree:
 
-    avgFuelConsumption = 0.0
     totalDistance = 0.0
     totalFuel = 0.0
+    avgFuelConsumption = 0.0
     columns = ('Antal mil (mil)', 'Tankad mängd (Liter)', 'Datum', 'Medel förbrukning (L/Mil)')
 
     def __init__(self, root):
@@ -49,13 +49,46 @@ class SimpleEditableTree:
         if selection:
             item = selection[0]
             new_values = [entry.get() for entry in self.entries]
+            # Calculate average for this row only
+            try:
+                distance = float(new_values[0])
+                fuel = float(new_values[1])
+                new_values[3] = round(fuel / distance if distance > 0 else 0.0, 2)
+            except (ValueError, TypeError):
+                new_values[3] = 0.0
             self.tree.item(item, values=new_values)
+            self.update_totals()
     
     def add_row(self):
         new_values = [entry.get() for entry in self.entries]
+        # Calculate average for this row only
+        try:
+            distance = float(new_values[0])
+            fuel = float(new_values[1])
+            new_values[3] = round(fuel / distance if distance > 0 else 0.0, 2)
+        except (ValueError, TypeError):
+            new_values[3] = 0.0
         self.tree.insert('', 'end', values=new_values)
         for entry in self.entries:
             entry.delete(0, tk.END)
+        self.update_totals()
+
+    def update_totals(self):
+        self.totalDistance = 0.0
+        self.totalFuel = 0.0
+        for item in self.tree.get_children():
+            values = self.tree.item(item)['values']
+            try:
+                self.totalDistance += float(values[0])
+                self.totalFuel += float(values[1])
+            except (ValueError, TypeError):
+                continue
+        
+        # calculate new average and update all rows
+        self.avgFuelConsumption = round((self.totalFuel / self.totalDistance if self.totalDistance > 0 else 0.0), 2)
+        
+    def update_avg_consumption(self, new_value):
+        self.avgFuelConsumption = new_value
 
 root = tk.Tk()
 app = SimpleEditableTree(root)
