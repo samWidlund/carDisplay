@@ -5,6 +5,8 @@ class SimpleEditableTree:
 
     # global variables
     totalDistance = 0.0
+    previousTotalDistance = 0.0
+    distanceDiff = 0.0
     totalFuel = 0.0
     avgFuel = 0.0
     columns = ('Mil', 'Bensin', 'Datum', 'Förbrukning')
@@ -61,32 +63,56 @@ class SimpleEditableTree:
     
     def add_row(self):
         new_values = [entry.get() for entry in self.entries]
-        
-        # calc avarage for current row only
         try:
-            distance = float(new_values[0])
+            current_distance = float(new_values[0])
             fuel = float(new_values[1])
-            new_values.append(round(fuel / distance if distance > 0 else 0.0, 2))
+
+            # get previous row
+            items = self.tree.get_children()
+            if items:
+                prev_item = items[-1]
+                prev_values = self.tree.item(prev_item)['values']
+                prev_distance = float(prev_values[0])
+                distance_diff = current_distance - prev_distance
+                avg = round(fuel / distance_diff if distance_diff > 0 else 0.0, 2)
+            else:
+                avg = "N/A"  # first row with no previous row
+            new_values.append(avg)
         except (ValueError, TypeError):
-            new_values[3] = 0.0
+            new_values.append(0.0)
         self.tree.insert('', 'end', values=new_values)
         for entry in self.entries:
             entry.delete(0, tk.END)
         self.update_totals()
 
     def update_totals(self):
-        self.totalDistance = 0.0
-        self.totalFuel = 0.0
-        for item in self.tree.get_children():
-            values = self.tree.item(item)['values']
+        items = self.tree.get_children()
+        if len(items) > 0:
+
+            # get previous row
+            latest_item = items[-1]
+            latest_values = self.tree.item(latest_item)['values']
+            
             try:
-                self.totalDistance += float(values[0])
-                self.totalFuel += float(values[1])
+                # new total
+                self.totalDistance = float(latest_values[0])
+                self.totalFuel = float(latest_values[1])
+                
+                # calc distance diff
+                self.distanceDiff = round(self.totalDistance - self.previousTotalDistance, 2)
+                
+                # calc new consumption based on new total and distance diff
+                self.avgFuel = round((self.totalFuel / self.distanceDiff if self.distanceDiff > 0 else 0.0), 2)
+                
+                # upd previousTotalDistance for next calc
+                self.previousTotalDistance = self.totalDistance
+                
             except (ValueError, TypeError):
-                continue
-        
-        self.avgFuel = round((self.totalFuel / self.totalDistance if self.totalDistance > 0 else 0.0), 2)
-        
+                self.totalDistance = 0.0
+                self.totalFuel = 0.0
+                self.distanceDiff = 0.0
+                self.avgFuel = 0.0
+
     def update_avg_consumption(self, new_value):
         self.avgFuel = new_value
 
