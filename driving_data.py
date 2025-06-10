@@ -6,7 +6,7 @@ class SimpleEditableTree:
     totalDistance = 0.0
     totalFuel = 0.0
     avgFuelConsumption = 0.0
-    columns = ('Antal mil (mil)', 'Tankad mängd (Liter)', 'Datum', 'Medel förbrukning (L/Mil)')
+    columns = ('Mil', 'Bensin (L)', 'Datum', 'Förbrukning (L/Mil)')
 
     def __init__(self, root):
         self.root = root
@@ -49,7 +49,8 @@ class SimpleEditableTree:
         if selection:
             item = selection[0]
             new_values = [entry.get() for entry in self.entries]
-            # Calculate average for this row only
+
+            # calc avarage for current row only
             try:
                 distance = float(new_values[0])
                 fuel = float(new_values[1])
@@ -61,7 +62,8 @@ class SimpleEditableTree:
     
     def add_row(self):
         new_values = [entry.get() for entry in self.entries]
-        # Calculate average for this row only
+        
+        # calc avarage for current row only
         try:
             distance = float(new_values[0])
             fuel = float(new_values[1])
@@ -84,7 +86,6 @@ class SimpleEditableTree:
             except (ValueError, TypeError):
                 continue
         
-        # calculate new average and update all rows
         self.avgFuelConsumption = round((self.totalFuel / self.totalDistance if self.totalDistance > 0 else 0.0), 2)
         
     def update_avg_consumption(self, new_value):
