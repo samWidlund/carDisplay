@@ -9,7 +9,7 @@ class SimpleEditableTree:
     distanceDiff = 0.0
     totalFuel = 0.0
     avgFuel = 0.0
-    columns = ('Mil', 'Bensin', 'Datum', 'Förbrukning')
+    columns = ('Datum', 'Mil', 'Bensin', 'Förbrukning')
 
     def __init__(self, root):
         self.root = root
@@ -50,29 +50,34 @@ class SimpleEditableTree:
         if selection:
             item = selection[0]
             new_values = [entry.get() for entry in self.entries]
-
-            # calc avarage for current row only
             try:
-                distance = float(new_values[0])
-                fuel = float(new_values[1])
-                new_values.append(round(fuel / distance if distance > 0 else 0.0, 2))
+                current_distance = float(new_values[1])
+                fuel = float(new_values[2])
+                items = self.tree.get_children()
+                if items:
+                    prev_item = items[-1]
+                    prev_values = self.tree.item(prev_item)['values']
+                    prev_distance = float(prev_values[1])
+                    distance_diff = current_distance - prev_distance
+                    avg = round(fuel / distance_diff if distance_diff > 0 else 0.0, 2)
+                else:
+                    avg = "N/A"
+                new_values.append(avg)
             except (ValueError, TypeError):
-                new_values[3] = 0.0
+                new_values.append(0.0)
             self.tree.item(item, values=new_values)
             self.update_totals()
     
     def add_row(self):
         new_values = [entry.get() for entry in self.entries]
         try:
-            current_distance = float(new_values[0])
-            fuel = float(new_values[1])
-
-            # get previous row
+            current_distance = float(new_values[1])
+            fuel = float(new_values[2])
             items = self.tree.get_children()
             if items:
                 prev_item = items[-1]
                 prev_values = self.tree.item(prev_item)['values']
-                prev_distance = float(prev_values[0])
+                prev_distance = float(prev_values[1])
                 distance_diff = current_distance - prev_distance
                 avg = round(fuel / distance_diff if distance_diff > 0 else 0.0, 2)
             else:
@@ -95,8 +100,8 @@ class SimpleEditableTree:
             
             try:
                 # new total
-                self.totalDistance = float(latest_values[0])
-                self.totalFuel = float(latest_values[1])
+                self.totalDistance = float(latest_values[1])
+                self.totalFuel = float(latest_values[2])
                 
                 # calc distance diff
                 self.distanceDiff = round(self.totalDistance - self.previousTotalDistance, 2)
