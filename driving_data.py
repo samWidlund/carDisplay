@@ -26,7 +26,7 @@ class SimpleEditableTree:
         frame.pack(pady=10)
         
         self.entries = []
-        for i in range(4):
+        for i in range(3):
             entry = tk.Entry(frame, width=15)
             entry.grid(row=0, column=i+1, padx=5)
             self.entries.append(entry)
@@ -55,7 +55,7 @@ class SimpleEditableTree:
             try:
                 distance = float(new_values[0])
                 fuel = float(new_values[1])
-                new_values[3] = round(fuel / distance if distance > 0 else 0.0, 2)
+                new_values.append(round(fuel / distance if distance > 0 else 0.0, 2))
             except (ValueError, TypeError):
                 new_values[3] = 0.0
             self.tree.item(item, values=new_values)
@@ -68,7 +68,7 @@ class SimpleEditableTree:
         try:
             distance = float(new_values[0])
             fuel = float(new_values[1])
-            new_values[3] = round(fuel / distance if distance > 0 else 0.0, 2)
+            new_values.append(round(fuel / distance if distance > 0 else 0.0, 2))
         except (ValueError, TypeError):
             new_values[3] = 0.0
         self.tree.insert('', 'end', values=new_values)
