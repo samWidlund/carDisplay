@@ -3,6 +3,7 @@ from tkinter import ttk
 
 class SimpleEditableTree:
 
+    # global variables
     totalDistance = 0.0
     totalFuel = 0.0
     avgFuelConsumption = 0.0
