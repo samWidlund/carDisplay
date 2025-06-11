@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from datetime import date
 
 class SimpleEditableTree:
 
@@ -10,6 +11,7 @@ class SimpleEditableTree:
     totalFuel = 0.0
     currentPrice = 0.0
     avgFuel = 0.0
+    date = date.today()
 
     columns = ('Datum', 'Miltal', 'Tankat (L)', 'Pris (kr/L)', 'Förbrukning (L/Mil)')
 
@@ -59,7 +61,7 @@ class SimpleEditableTree:
         selection = self.tree.selection()
         if selection:
             item = selection[0]
-            new_values = [entry.get() for entry in self.entries]
+            new_values = [self.date] + [entry.get() for entry in self.entries[1:]]
             try:
                 current_distance = float(new_values[1])
                 fuel = float(new_values[2])
@@ -80,7 +82,7 @@ class SimpleEditableTree:
             self.update_totals()
     
     def add_row(self):
-        new_values = [entry.get() for entry in self.entries]
+        new_values = [date] + [entry.get() for entry in self.entries[1:]]
         try:
             current_distance = float(new_values[1])
             fuel = float(new_values[2])
