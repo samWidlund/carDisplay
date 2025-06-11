@@ -38,13 +38,13 @@ class SimpleEditableTree:
         frame.pack(pady=10)
         
         self.entries = []
-        for i in range(4):
+        for i in range(3):
             entry = tk.Entry(frame, width=15)
             entry.grid(row=0, column=i+1, padx=5)
             self.entries.append(entry)
         
-        tk.Button(frame, text="Lägg till", command=self.add_row).grid(row=0, column=8, padx=5)
-        tk.Button(frame, text="Uppdatera", command=self.update_selected).grid(row=0, column=9, padx=5)
+        tk.Button(frame, text="Lägg till", command=self.add_row).grid(row=0, column=6, padx=5)
+        tk.Button(frame, text="Uppdatera", command=self.update_selected).grid(row=0, column=7, padx=5)
         
         self.tree.bind('<<TreeviewSelect>>', self.on_select)
     
@@ -61,11 +61,10 @@ class SimpleEditableTree:
         selection = self.tree.selection()
         if selection:
             item = selection[0]
-            new_values = [self.date] + [entry.get() for entry in self.entries[1:]]
+            new_values = [self.date] + [entry.get() for entry in self.entries]
             try:
                 current_distance = float(new_values[1])
                 fuel = float(new_values[2])
-                price = float(new_values[3])
                 items = self.tree.get_children()
                 if items:
                     prev_item = items[-1]
@@ -82,11 +81,10 @@ class SimpleEditableTree:
             self.update_totals()
     
     def add_row(self):
-        new_values = [date] + [entry.get() for entry in self.entries[1:]]
+        new_values = [self.date] + [entry.get() for entry in self.entries]
         try:
             current_distance = float(new_values[1])
             fuel = float(new_values[2])
-            price = float(new_values[3])
             items = self.tree.get_children()
             if items:
                 prev_item = items[-1]
