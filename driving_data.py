@@ -11,7 +11,7 @@ class SimpleEditableTree:
     currentPrice = 0.0
     avgFuel = 0.0
 
-    columns = ('Datum', 'Mil', 'Tankat', 'Pris', 'Förbrukning')
+    columns = ('Datum', 'Miltal', 'Tankat (L)', 'Pris (kr/L)', 'Förbrukning (L/Mil)')
 
     def __init__(self, root):
         self.root = root
@@ -20,9 +20,17 @@ class SimpleEditableTree:
         self.tree = ttk.Treeview(root, columns=self.columns, show='headings')
         self.tree.pack(pady=10)
         
-        for col in (self.columns):
-            self.tree.heading(col, text=f'{col}')
-            self.tree.column(col, width=100)
+        headers = {
+            'Datum': 'Datum',
+            'Miltal': 'Miltal',
+            'Tankat (L)': 'Tankat (L)',
+            'Pris (kr/L)': 'Pris (kr/L)',
+            'Förbrukning (L/Mil)': 'Förbrukning (L/Mil)',
+        }
+        
+        for col in self.columns:
+            self.tree.heading(col, text=headers[col])
+            self.tree.column(col, width=140) 
                 
         frame = tk.Frame(root)
         frame.pack(pady=10)
