@@ -32,7 +32,7 @@ class SimpleEditableTree:
         
         for col in self.columns:
             self.tree.heading(col, text=headers[col])
-            self.tree.column(col, width=140) 
+            self.tree.column(col, width=200) 
                 
         frame = tk.Frame(root)
         frame.pack(pady=10)
@@ -45,6 +45,7 @@ class SimpleEditableTree:
         
         tk.Button(frame, text="Lägg till", command=self.add_row).grid(row=0, column=8, padx=5)
         tk.Button(frame, text="Uppdatera", command=self.update_selected).grid(row=0, column=9, padx=5)
+        tk.Button(frame, text="Rensa", command=self.clear_rows).grid(row=0, column=10, padx=5)
         
         self.tree.bind('<<TreeviewSelect>>', self.on_select)
     
@@ -134,6 +135,11 @@ class SimpleEditableTree:
 
     def update_avg_consumption(self, new_value):
         self.avgFuel = new_value
+
+    def clear_rows(self):
+        allRows = self.tree.get_children()
+        for row in allRows:
+            self.tree.delete(row)
 
 root = tk.Tk()
 app = SimpleEditableTree(root)
