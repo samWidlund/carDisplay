@@ -83,7 +83,7 @@ class SimpleEditableTree:
             self.update_totals()
     
     def add_row(self):
-        new_values = [date] + [entry.get() for entry in self.entries[1:]]
+        new_values = [self.date] + [entry.get() for entry in self.entries[1:]]
         try:
             current_distance = float(new_values[1])
             fuel = float(new_values[2])
