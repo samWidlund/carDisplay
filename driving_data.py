@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from datetime import date
+import csv
 
 class SimpleEditableTree:
 
@@ -12,10 +13,25 @@ class SimpleEditableTree:
     currentPrice = 0.0
     avgFuel = 0.0
     date = date.today()
+    fileName = "driving_data.csv"
 
     columns = ('Datum', 'Miltal', 'Tankat (L)', 'Pris (kr/L)', 'Förbrukning (L/Mil)')
 
     def __init__(self, root):
+
+        # TESTING TESTING
+        # print current content in csv file
+        with open(self.fileName, 'r', newline='') as csvfile:
+            reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+            for row in reader:
+                print(row)
+
+        # write new info to csv file
+        with open(self.fileName, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            writer.writerow(['test, ' * 5])
+        # TESTING TESTING
+        
         self.root = root
         self.root.title("Fuel Data")
         
