@@ -15,35 +15,21 @@ class SimpleEditableTree:
     date = date.today()
     fileName = "driving_data.csv"
 
-    columns = ('Datum', 'Miltal', 'Tankat (L)', 'Pris (kr/L)', 'Förbrukning (L/Mil)')
+    columns = ('Datum', 'Miltal', 'Tankat (L)', 'Pris (kr/L)', 'Forbrukning (L/Mil)')
 
     def __init__(self, root):
 
-        # TESTING TESTING
-        # print current content in csv file
-        with open(self.fileName, 'r', newline='') as csvfile:
-            reader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-            for row in reader:
-                print(row)
-
-        # write new info to csv file
-        with open(self.fileName, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile, delimiter=' ', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(['test, ' * 5])
-        # TESTING TESTING
-        
+        # display
         self.root = root
         self.root.title("Fuel Data")
-        
         self.tree = ttk.Treeview(root, columns=self.columns, show='headings')
         self.tree.pack(pady=10)
-        
         headers = {
             'Datum': 'Datum',
             'Miltal': 'Miltal',
             'Tankat (L)': 'Tankat (L)',
             'Pris (kr/L)': 'Pris (kr/L)',
-            'Förbrukning (L/Mil)': 'Förbrukning (L/Mil)',
+            'Forbrukning (L/Mil)': 'Forbrukning (L/Mil)',
         }
         
         for col in self.columns:
@@ -64,7 +50,13 @@ class SimpleEditableTree:
         tk.Button(frame, text="Rensa", command=self.clear_rows).grid(row=0, column=10, padx=5)
         
         self.tree.bind('<<TreeviewSelect>>', self.on_select)
-    
+
+        # print content in file
+        with open(self.fileName, 'r', newline='') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                print(row)
+
     def on_select(self, event):
         selection = self.tree.selection()
         if selection:
@@ -118,6 +110,7 @@ class SimpleEditableTree:
         for entry in self.entries:
             entry.delete(0, tk.END)
         self.update_totals()
+        self.save_to_csv()
 
     def update_totals(self):
         items = self.tree.get_children()
@@ -154,6 +147,19 @@ class SimpleEditableTree:
         allRows = self.tree.get_children()
         for row in allRows:
             self.tree.delete(row)
+
+    # FIX SO IT DOES NOT SAVE ALL ROWS EACH TIME FUNCTION IS CALLED
+    def save_to_csv(self):
+        with open(self.fileName, 'a', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            rows = self.tree.get_children()
+
+            # test
+            writer.self.tree.item(rows)['values']
+
+            for row_id in self.tree.get_children():
+                row = self.tree.item(row_id)['values']
+                writer.writerow(row)
 
 root = tk.Tk()
 app = SimpleEditableTree(root)
