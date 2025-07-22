@@ -153,12 +153,12 @@ class SimpleEditableTree:
             writer = csv.writer(csvfile)
             writer.writerow(self.latest_row_values) # append latest row to file    
 
-    def delete_selected(self):
+    def delete_selected(self): # note: does not remove row from driving_data.csv
         selection = self.tree.selection()
         print(selection)
         for item in selection:
             self.tree.delete(item)
-            
+
 root = tk.Tk()
 app = SimpleEditableTree(root)
 root.mainloop()
