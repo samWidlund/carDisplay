@@ -15,5 +15,5 @@ Python program which displays relevant data for driving the Toyota Yaris.
 
 ## backlog
 
-- set date on auto via python library
+- make csv file dynamic to match update row
 - make shortcut/hotkey/config to activate venv
