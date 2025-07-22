@@ -5,7 +5,7 @@ import csv
 
 class SimpleEditableTree:
 
-    # class variables
+    # instance variables
     totalDistance = 0.0
     previousTotalDistance = 0.0
     distanceDiff = 0.0
