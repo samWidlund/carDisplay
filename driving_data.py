@@ -108,6 +108,8 @@ class SimpleEditableTree:
         except (ValueError, TypeError):
             new_values.append(0.0)
         self.tree.insert('', 'end', values=new_values)
+        self.latest_row_values = new_values # save current row in variable
+        
         for entry in self.entries:
             entry.delete(0, tk.END)
         self.update_totals()
@@ -149,18 +151,10 @@ class SimpleEditableTree:
         for row in allRows:
             self.tree.delete(row)
 
-    # FIX SO IT DOES NOT SAVE ALL ROWS EACH TIME FUNCTION IS CALLED
     def save_to_csv(self):
         with open(self.fileName, 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
-            rows = self.tree.get_children()
-
-            # test
-            writer.self.tree.item(rows)['values']
-
-            for row_id in self.tree.get_children():
-                row = self.tree.item(row_id)['values']
-                writer.writerow(row)
+            writer.writerow(self.latest_row_values) # append latest row to file    
 
 root = tk.Tk()
 app = SimpleEditableTree(root)
