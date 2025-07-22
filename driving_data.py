@@ -47,7 +47,7 @@ class SimpleEditableTree:
         
         tk.Button(frame, text="Lägg till", command=self.add_row).grid(row=0, column=8, padx=5)
         tk.Button(frame, text="Uppdatera", command=self.update_selected).grid(row=0, column=9, padx=5)
-        tk.Button(frame, text="Radera rad", command=self.update_selected).grid(row=0, column=10, padx=5)
+        tk.Button(frame, text="Radera rad", command=self.delete_selected).grid(row=0, column=10, padx=5)
         tk.Button(frame, text="Rensa allt", command=self.clear_rows).grid(row=0, column=11, padx=5)
         
         self.tree.bind('<<TreeviewSelect>>', self.on_select)
@@ -153,6 +153,12 @@ class SimpleEditableTree:
             writer = csv.writer(csvfile)
             writer.writerow(self.latest_row_values) # append latest row to file    
 
+    def delete_selected(self):
+        selection = self.tree.selection()
+        print(selection)
+        for item in selection:
+            self.tree.delete(item)
+            
 root = tk.Tk()
 app = SimpleEditableTree(root)
 root.mainloop()
