@@ -51,7 +51,7 @@ class SimpleEditableTree:
         
         self.tree.bind('<<TreeviewSelect>>', self.on_select)
 
-        # print content in file
+        # print content in file (debug)
         with open(self.fileName, 'r', newline='') as csvfile:
             reader = csv.reader(csvfile)
             for row in reader:
