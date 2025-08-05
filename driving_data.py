@@ -14,7 +14,7 @@ class SimpleEditableTree:
     currentPrice = 0.0
     avgFuel = 0.0
     date = date.today()
-    fileName = os.path.join(os.path.dirname(__file__), "driving_data.csv")
+    filePath = os.path.join(os.path.dirname(__file__), "driving_data.csv")
 
     columns = ('Datum', 'Miltal', 'Tankat (L)', 'Pris (kr/L)', 'Forbrukning (L/Mil)')
 
@@ -150,7 +150,7 @@ class SimpleEditableTree:
             self.tree.delete(row)
 
     def save_to_csv(self):
-        with open(self.fileName, 'a', newline='') as csvfile:
+        with open(self.filePath, 'a', newline='') as csvfile:
             writer = csv.writer(csvfile)
             writer.writerow(self.latest_row_values) # append latest row to file    
 
