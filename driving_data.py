@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from datetime import date
 import csv
+import os
 
 class SimpleEditableTree:
 
@@ -13,7 +14,7 @@ class SimpleEditableTree:
     currentPrice = 0.0
     avgFuel = 0.0
     date = date.today()
-    fileName = "driving_data.csv"
+    fileName = os.path.join(os.path.dirname(__file__), "driving_data.csv")
 
     columns = ('Datum', 'Miltal', 'Tankat (L)', 'Pris (kr/L)', 'Forbrukning (L/Mil)')
 
