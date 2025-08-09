@@ -9,49 +9,37 @@ body {
     background-color: #000;
 }   
 
-#spotify {
-    background-color: #1ed760;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer; 
-    width: 20vw;
-    height: 20vh;
-}
-
-#samtal {
-    background-color: gray;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 20vw;
-    height: 20vh;
-}
-
-#maps {
-    background-color: blue;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 20vw;
-    height: 20vh;
-}
-
 .buttons {
     display: flex;
     gap: 10px;
 }
 
-#spotify:hover {
-    border: 1px solid white;
+.button {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 20vw;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #000;
+    transition: border 0.3s ease;
 }
 
-#samtal:hover {
-    border: 1px solid white;
+#spotify {
+    background-color: #1ed760;
 }
 
-#maps:hover {
+#samtal {
+    background-color: gray;
+}
+
+#maps {
+    background-color: blue;
+}
+
+.button:hover {
     border: 1px solid white;
 }
