@@ -1,4 +1,4 @@
-console.log("script.js är laddad!");
+console.log("scripts.js är laddad!");
 
 function checkOnlineStatus() {
     if (navigator.onLine) {
