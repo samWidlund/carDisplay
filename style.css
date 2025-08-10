@@ -6,7 +6,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #000;
+    background-color: #fff;
 }   
 
 .buttons {
@@ -42,4 +42,11 @@ body {
 
 .button:hover {
     border: 1px solid white;
+}
+
+#digitalClock{
+    width: 100%;
+    height: auto;
+    text-align: center;
+    font-size: 3rem;
 }
