@@ -53,12 +53,10 @@ body {
 
 .buttons {
     display: flex;
-    gap: 10px;
 }
 
 .button {
     border: none;
-    border-radius: 5px;
     cursor: pointer;
     width: 20vw;
     height: 20vh;
@@ -66,22 +64,7 @@ body {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: #000;
     transition: border 0.3s ease;
-}
-
-#spotify {
-    border-radius: 50%;
-}
-#samtal {
-    border-radius: 25%;
-}
-#maps {
-    border-radius: 17%;
-}
-
-.button:hover {
-    border: 1px solid black;
 }
 
 #digitalClock{
