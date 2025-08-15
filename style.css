@@ -28,15 +28,13 @@ body {
 }
 
 #spotify {
-    background-color: #1ed760;
+    border-radius: 50%;
 }
-
 #samtal {
-    background-color: gray;
+    border-radius: 25%;
 }
-
 #maps {
-    background-color: blue;
+    border-radius: 7%;
 }
 
 .button:hover {
