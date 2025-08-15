@@ -1,4 +1,4 @@
-/* Digital fonts */
+/* fonts */
 @font-face {
     font-family: 'Digital';
     src: url('./font/DS-DIGI.TTF') format('truetype');
@@ -26,6 +26,19 @@
     font-weight: 100;
     font-style: normal;
 }
+
+.bold-digital {
+    font-family: 'DigitalBold', monospace;
+}
+
+.digital-text {
+    font-family: 'Digital', monospace;
+}
+
+.italic-digital {
+    font-family: 'DigitalItalic', monospace;
+}
+/* fonts */
 
 body {
     padding: 0;
@@ -79,16 +92,4 @@ body {
     font-family: 'Digital', monospace;
     color: #00ff00;
     text-shadow: 0 0 10px #00ff00;
-}
-
-.bold-digital {
-    font-family: 'DigitalBold', monospace;
-}
-
-.digital-text {
-    font-family: 'Digital', monospace;
-}
-
-.italic-digital {
-    font-family: 'DigitalItalic', monospace;
 }
