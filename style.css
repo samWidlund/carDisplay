@@ -35,6 +35,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color:#000;
 }   
 
 .buttons {
@@ -63,7 +64,7 @@ body {
     border-radius: 25%;
 }
 #maps {
-    border-radius: 7%;
+    border-radius: 17%;
 }
 
 .button:hover {
@@ -71,7 +72,7 @@ body {
 }
 
 #digitalClock{
-    width: 100%;
+    width: 100%;    
     height: auto;
     text-align: center;
     font-size: 3rem;
