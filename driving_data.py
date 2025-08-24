@@ -4,7 +4,7 @@ from datetime import date
 import csv
 import os
 
-class SimpleEditableTree:
+class DrivingData:
 
     # instance variables
     totalDistance = 0.0
@@ -161,5 +161,5 @@ class SimpleEditableTree:
             self.tree.delete(item)
 
 root = tk.Tk()
-app = SimpleEditableTree(root)
+app = DrivingData(root)
 root.mainloop()
